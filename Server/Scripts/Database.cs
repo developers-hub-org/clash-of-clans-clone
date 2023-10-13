@@ -14,15 +14,12 @@ namespace DevelopersHub.RealtimeNetworking.Server
     class Database
     {
 
-        private static string[] clientVersions = { "1.0.0", "1.0.1" };
-
         #region Main Data And Methods
 
         private const string _mysqlServer = "127.0.0.1";
         private const string _mysqlUsername = "root";
         private const string _mysqlPassword = "";
-        private const string _mysqlDatabase = "clash_dark";
-        public static readonly string dataFolderPath = "C:\\Clash Of Whatever\\";
+        private const string _mysqlDatabase = "clash_of_whatever";
 
         public static MySqlConnection GetMysqlConnection()
         {
@@ -169,7 +166,7 @@ namespace DevelopersHub.RealtimeNetworking.Server
             {
                 Server.clients[id].device = device;
                 Server.clients[id].account = auth.accountID;
-                auth.versions = clientVersions;
+                auth.versions = Terminal.clientVersions;
                 string authData = await Data.SerializeAsync<Data.InitializationData>(auth);
                 byte[] authBytes = await Data.CompressAsync(authData);
                 packet.Write(1);
@@ -2246,7 +2243,7 @@ namespace DevelopersHub.RealtimeNetworking.Server
                         Sender.TCP_Send(client_id, packet);
                     }
 
-                    string folder = dataFolderPath + "Battle\\";
+                    string folder = Terminal.dataFolderPath + "Battle\\";
                     string key = Guid.NewGuid().ToString();
                     string path = folder + key + ".txt";
                     if (!Directory.Exists(folder))
@@ -2450,7 +2447,7 @@ namespace DevelopersHub.RealtimeNetworking.Server
                 }
                 connection.Close();
             }
-            string folder = dataFolderPath + "Other\\";
+            string folder = Terminal.dataFolderPath + "Other\\";
             string key = Guid.NewGuid().ToString();
             string path = folder + key + ".txt";
             if (!Directory.Exists(folder))
@@ -3074,7 +3071,7 @@ namespace DevelopersHub.RealtimeNetworking.Server
 
                         string reportData = Data.Serialize<Data.ClanWarData>(report);
                         string key = Guid.NewGuid().ToString();
-                        string folder = dataFolderPath + "Battle\\";
+                        string folder = Terminal.dataFolderPath + "Battle\\";
                         string path = folder + key + ".txt";
                         if (!Directory.Exists(folder))
                         {

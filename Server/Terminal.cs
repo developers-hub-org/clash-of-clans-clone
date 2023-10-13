@@ -15,9 +15,12 @@ namespace DevelopersHub.RealtimeNetworking.Server
         #endregion
 
         #region Connection
+        public static string[] clientVersions = { "1.0.0", "1.0.1" };
         public const int maxPlayers = 100000;
         public const int portNumber = 5555;
         public static int onlinePlayers = 0;
+        public static readonly string dataFolderPath = "C:\\Clash Of Whatever\\";
+        public static readonly string logFolderPath = "C:\\Clash Of Whatever\\Errors\\";
 
         public static void OnClientConnected(int id, string ip)
         {

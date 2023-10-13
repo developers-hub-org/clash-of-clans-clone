@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -9,8 +8,6 @@ namespace DevelopersHub.RealtimeNetworking.Server
 {
     class Tools
     {
-
-        public static readonly string logFolderPath = "C:\\Clash Of Whatever\\Errors\\";
 
         public static string GenerateToken()
         {
@@ -59,7 +56,7 @@ namespace DevelopersHub.RealtimeNetworking.Server
             {
                 try
                 {
-                    string folderPath = logFolderPath;
+                    string folderPath = Terminal.logFolderPath;
                     if (!string.IsNullOrEmpty(folder))
                     {
                         folderPath = folderPath  + folder + "\\";
