@@ -13,8 +13,8 @@ namespace DevelopersHub.RealtimeNetworking.Server
 
         protected static readonly string host = "smtp.gmail.com";
         protected static readonly int port = 587;
-        protected static readonly string address = "developershub.noreply@gmail.com";
-        protected static readonly string password = "vghbdayzxdesrroi";
+        protected static readonly string address = "demo@gmail.com";
+        protected static readonly string password = "abcd";
         protected static readonly string name = "Developers Hub";
         protected static readonly string logo = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
 
