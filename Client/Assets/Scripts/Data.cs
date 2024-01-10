@@ -176,17 +176,7 @@
 
         public static bool IsMessageGoodToSend(string message)
         {
-            if (message.Contains("کیر")) { return false; }
-            else if (message.Contains("کون")) { return false; }
-            else if (message.Contains("جنده")) { return false; }
-            else if (message.Contains("کسکش")) { return false; }
-            else if (message.Contains("هرزه")) { return false; }
-            else if (message.Contains("گایید")) { return false; }
-            else if (message.Contains("گائید")) { return false; }
-            else if (message.Contains("فاحشه")) { return false; }
-            else if (message.Contains("fuck")) { return false; }
-            else if (message.Contains("asshole")) { return false; }
-            else if (message.Contains("shit")) { return false; }
+            // if (message.Contains("fork")) { return false; }
             return true;
         }
 
