@@ -272,6 +272,7 @@
             _warSelectedScout.interactable = (selectedWarMember._data.id != Player.instanse.data.id);
             selectedWarMember.selectedEffects.SetActive(true);
             _warMapSelectPanel.gameObject.SetActive(true);
+            _warSelectedName.ForceMeshUpdate(true);
         }
 
         private void Attack()
@@ -354,6 +355,7 @@
             _prevButton.interactable = (clans.page != 1 && clans.clans.Count > 0);
             _firstButton.interactable = (clans.page != 1 && clans.clans.Count > 0);
             _pageText.text = clans.page.ToString() + "/" + clans.pagesCount.ToString();
+            _pageText.ForceMeshUpdate(true);
             _listPanel.SetActive(true);
             _profilePanel.SetActive(false);
             _createPanel.SetActive(false);
@@ -406,11 +408,15 @@
             _profileWar.gameObject.SetActive(Player.instanse.data.clanID > 0 && Player.instanse.data.clanID == clan.id);
             _profileJoin.interactable = (clan.members.Count < Data.clanMaxMembers);
             _profileName.text = Data.DecodeString(profileClan.name);
+            _profileName.ForceMeshUpdate(true);
             int reqXp = Data.GetClanNexLevelRequiredXp(profileClan.level);
             _xpText.text = profileClan.xp.ToString() + "/" + reqXp.ToString();
+            _xpText.ForceMeshUpdate(true);
             _xpBar.fillAmount = ((float)profileClan.xp / (float)reqXp);
             _leveText.text = profileClan.level.ToString();
+            _leveText.ForceMeshUpdate(true);
             _trophiesText.text = profileClan.trophies.ToString();
+            _trophiesText.ForceMeshUpdate(true);
             _profileIcon.sprite = patterns[profileClan.pattern];
             _profileBackground.color = Tools.HexToColor(profileClan.backgroundColor);
             _profileIcon.color = Tools.HexToColor(profileClan.patternColor);
@@ -596,6 +602,7 @@
         public void WarOpen(Data.ClanWarData data, bool isReport = false)
         {
             _warTimerText.text = "";
+            _warTimerText.ForceMeshUpdate(true);
             _isReport = isReport;
             _mapNormalPanel.SetActive(true);
             _mapReportPanel.SetActive(false);
@@ -709,12 +716,14 @@
                 _warClan1Background.color = Tools.HexToColor(data.clan1.backgroundColor);
                 _warClan1Icon.color = Tools.HexToColor(data.clan1.patternColor);
                 _warClan1Icon.sprite = patterns[data.clan1.pattern];
-
+                _warClan1Name.ForceMeshUpdate(true);
+                
                 _warClan2Name.text = Data.DecodeString(data.clan2.name);
                 _warClan2Background.color = Tools.HexToColor(data.clan2.backgroundColor);
                 _warClan2Icon.color = Tools.HexToColor(data.clan2.patternColor);
                 _warClan2Icon.sprite = patterns[data.clan2.pattern];
-
+                _warClan2Name.ForceMeshUpdate(true);
+                
                 _warEditLayout.gameObject.SetActive(data.clan1.war.stage == 1);
                 _viewReportButton.gameObject.SetActive(isReport);
 
@@ -725,17 +734,20 @@
                         case Language.LanguageID.persian: _warTimer.text = "جنگ به پایان رسید"; break;
                         default: _warTimer.text = "War has ended"; break;
                     }
-
+                    _warTimer.ForceMeshUpdate(true);
+                    
                     _reportClan1Name.text = Data.DecodeString(data.clan1.name);
                     _reportClan1Background.color = Tools.HexToColor(data.clan1.backgroundColor);
                     _reportClan1Icon.color = Tools.HexToColor(data.clan1.patternColor);
                     _reportClan1Icon.sprite = patterns[data.clan1.pattern];
-
+                    _reportClan1Name.ForceMeshUpdate(true);
+                    
                     _reportClan2Name.text = Data.DecodeString(data.clan2.name);
                     _reportClan2Background.color = Tools.HexToColor(data.clan2.backgroundColor);
                     _reportClan2Icon.color = Tools.HexToColor(data.clan2.patternColor);
                     _reportClan2Icon.sprite = patterns[data.clan2.pattern];
-
+                    _reportClan2Name.ForceMeshUpdate(true);
+                    
                     if (warData.winnerID <= 0)
                     {
                         switch (Language.instanse.language)
@@ -763,13 +775,14 @@
                         }
                         _reportTitle.color = Color.red;
                     }
-
                     _reportStars.text = warData.clan1Stars + " - " + warData.clan2Stars;
                 }
                 _mapNormalPanel.SetActive(!_isReport);
                 _mapReportPanel.SetActive(_isReport);
                 _warMapBack.gameObject.SetActive(!_isReport);
                 _warMapPanel.SetActive(true);
+                _reportTitle.ForceMeshUpdate(true);
+                _reportStars.ForceMeshUpdate(true);
             }
             else
             {
@@ -792,6 +805,8 @@
                     _warSearchCount.text = data.count.ToString() + " VS " + data.count.ToString();
                     _warCancel.interactable = found;
                     _warSearchPanel.SetActive(true);
+                    _warSearchStarter.ForceMeshUpdate(true);
+                    _warSearchCount.ForceMeshUpdate(true);
                 }
                 else
                 {
@@ -860,6 +875,8 @@
                             }
                             _warTimer.text = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss");
                             _warTimerText.text = tm;
+                            _warTimer.ForceMeshUpdate(true);
+                            _warTimerText.ForceMeshUpdate(true);
                         }
                         else
                         {
@@ -942,7 +959,7 @@
             membersInWar.Clear();
             ClearWarMembersSelect();
             _warMembersCount.text = "0 VS 0";
-
+            _warMembersCount.ForceMeshUpdate(true);
             _warNormalPanel.SetActive(false);
             _warSearchPanel.SetActive(false);
             _warMapPanel.SetActive(false);
@@ -978,6 +995,7 @@
             }
             _warConfirm.interactable = found;
             _warMembersCount.text = membersInWar.Count + " VS " + membersInWar.Count;
+            _warMembersCount.ForceMeshUpdate(true);
         }
 
         private void WarConfirm()
@@ -1130,10 +1148,13 @@
                 _createConfirm.interactable = Data.clanCreatePrice <= Player.instanse.gold;
                 _createCostText.color = Data.clanCreatePrice <= Player.instanse.gold ? Color.white : Color.red;
                 _createCostPanel.SetActive(true);
+                _createCostText.ForceMeshUpdate(true);
             }
             _createName.text = Data.DecodeString(clanToSave.name);
             _createTrophiesText.text = clanToSave.minTrophies.ToString();
+            _createTrophiesText.ForceMeshUpdate(true);
             _createHallText.text = clanToSave.minTownhallLevel.ToString();
+            _createHallText.ForceMeshUpdate(true);
             _createIcon.sprite = patterns[clanToSave.pattern];
             _createBackground.color = Tools.HexToColor(clanToSave.backgroundColor);
             _createIcon.color = Tools.HexToColor(clanToSave.patternColor);
@@ -1177,6 +1198,7 @@
                     }
                     break;
             }
+            _createJoinText.ForceMeshUpdate(true);
         }
 
         private void CreateConfirm()
@@ -1435,6 +1457,7 @@
             if (clanToSave.minTrophies > 5500) { clanToSave.minTrophies = 0; }
             if (clanToSave.minTrophies < 0) { clanToSave.minTrophies = 5500; }
             _createTrophiesText.text = clanToSave.minTrophies.ToString();
+            _createTrophiesText.ForceMeshUpdate(true);
         }
 
         private void CreateTrophiesPrev()
@@ -1443,6 +1466,7 @@
             if (clanToSave.minTrophies > 5500) { clanToSave.minTrophies = 0; }
             if (clanToSave.minTrophies < 0) { clanToSave.minTrophies = 5500; }
             _createTrophiesText.text = clanToSave.minTrophies.ToString();
+            _createTrophiesText.ForceMeshUpdate(true);
         }
 
         private void CreateHallNext()
@@ -1451,6 +1475,7 @@
             if (clanToSave.minTownhallLevel > 15) { clanToSave.minTownhallLevel = 1; }
             if (clanToSave.minTownhallLevel < 1) { clanToSave.minTownhallLevel = 15; }
             _createHallText.text = clanToSave.minTownhallLevel.ToString();
+            _createHallText.ForceMeshUpdate(true);
         }
 
         private void CreateHallPrev()
@@ -1459,6 +1484,7 @@
             if (clanToSave.minTownhallLevel > 15) { clanToSave.minTownhallLevel = 1; }
             if (clanToSave.minTownhallLevel < 1) { clanToSave.minTownhallLevel = 15; }
             _createHallText.text = clanToSave.minTownhallLevel.ToString();
+            _createHallText.ForceMeshUpdate(true);
         }
 
         private void CreatePatternNext()

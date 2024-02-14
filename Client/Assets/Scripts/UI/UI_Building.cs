@@ -40,6 +40,7 @@ namespace DevelopersHub.ClashOfWhatecer
             {
                 _titleText.horizontalAlignment = HorizontalAlignmentOptions.Right;
             }
+            _titleText.ForceMeshUpdate(true);
             Sprite icon = AssetsBank.GetBuildingIcon(_id);
             if(icon != null)
             {
@@ -130,6 +131,9 @@ namespace DevelopersHub.ClashOfWhatecer
                 _resourceIcon.sprite = AssetsBank.instanse.gemsIcon;
                 _button.interactable = false;
             }
+            _resourceText.ForceMeshUpdate(true);
+            _timeText.ForceMeshUpdate(true);
+            _countText.ForceMeshUpdate(true);
         }
 
         private void Info()

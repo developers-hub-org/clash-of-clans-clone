@@ -28,7 +28,7 @@
         private static void Initialize()
         {
             if(_instance != null) { return; }
-            _instance = FindObjectOfType<Language>();
+            _instance = FindFirstObjectByType<Language>();
             if(_instance == null)
             {
                 _instance = new GameObject("Language").AddComponent<Language>();

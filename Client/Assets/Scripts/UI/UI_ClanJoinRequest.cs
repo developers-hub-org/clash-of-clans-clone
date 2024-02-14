@@ -33,6 +33,9 @@ namespace DevelopersHub.ClashOfWhatecer
             _name.text = Data.DecodeString(data.name);
             _trophies.text = data.trophies.ToString();
             _level.text = data.level.ToString();
+            _name.ForceMeshUpdate(true);
+            _trophies.ForceMeshUpdate(true);
+            _name.ForceMeshUpdate(true);
         }
 
         private void Accept()

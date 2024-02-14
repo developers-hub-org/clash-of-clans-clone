@@ -30,7 +30,7 @@ namespace DevelopersHub.RealtimeNetworking.Client
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<Client>();
+                    _instance = FindFirstObjectByType<Client>();
                     if (_instance == null)
                     {
                         _instance = new GameObject("Client").AddComponent<Client>();
@@ -67,7 +67,7 @@ namespace DevelopersHub.RealtimeNetworking.Client
                 Debug.LogError(ex.Message);
             }
             DontDestroyOnLoad(gameObject);
-            Threading[] threadings = FindObjectsOfType<Threading>();
+            Threading[] threadings = FindObjectsByType<Threading>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
             if (threadings != null && threadings.Length > 0)
             {
                 for (int i = 0; i < threadings.Length; i++)

@@ -44,7 +44,7 @@ namespace DevelopersHub.RealtimeNetworking.Client
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<RealtimeNetworking>();
+                    _instance = FindFirstObjectByType<RealtimeNetworking>();
                     if (_instance == null)
                     {
                         _instance = Client.instance.gameObject.AddComponent<RealtimeNetworking>();

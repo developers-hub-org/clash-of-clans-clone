@@ -23,6 +23,10 @@ namespace DevelopersHub.ClashOfWhatecer
             _trophiesText.text = player.trophies.ToString();
             _rankText.text = player.rank.ToString();
             _nameText.text = Data.DecodeString(player.name);
+            _levelText.ForceMeshUpdate(true);
+            _trophiesText.ForceMeshUpdate(true);
+            _nameText.ForceMeshUpdate(true);
+            _rankText.ForceMeshUpdate(true);
         }
 
     }

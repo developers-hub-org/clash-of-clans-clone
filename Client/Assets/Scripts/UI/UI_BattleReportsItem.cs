@@ -28,7 +28,9 @@ namespace DevelopersHub.ClashOfWhatecer
         {
             _data = data;
             _nameText.text = Data.DecodeString(_data.username);
+            _nameText.ForceMeshUpdate(true);
             _trophiesText.text = _data.trophies.ToString();
+            _trophiesText.ForceMeshUpdate(true);
             _attackIcon.SetActive(_data.attacker == Player.instanse.data.id);
             _defendIcon.SetActive(_data.defender == Player.instanse.data.id);
             if ((_data.attacker == Player.instanse.data.id && _data.stars > 0) || (_data.defender == Player.instanse.data.id && _data.stars <= 0))

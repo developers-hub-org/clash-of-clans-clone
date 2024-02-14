@@ -1,6 +1,5 @@
 namespace DevelopersHub.ClashOfWhatecer
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using TMPro;
@@ -23,13 +22,14 @@ namespace DevelopersHub.ClashOfWhatecer
 
         private static UI_Train _instance = null; public static UI_Train instanse { get { return _instance; } }
         private bool _active = false; public bool isActive { get { return _active; } }
-        private List<UI_UnitsTraining> trainigItems = new List<UI_UnitsTraining>();
+        private List<UI_UnitsTraining> trainigItems = new List<UI_UnitsTraining>(); public int trainigItemsCount { get { return trainigItems.Count; } }
         private List<UI_Unit> uiUnits = new List<UI_Unit>();
 
         private float trainingItemHeight = 1;
         private int _occupiedHousing = 0;
         private int _availableHousing = 0; public int freeHousing { get { return _availableHousing - _occupiedHousing; } }
-
+        private int _targetIndex = 0; public int targetIndex { get { return _targetIndex; } set { _targetIndex = value; }}
+        
         private void Awake()
         {
             _instance = this;
@@ -91,6 +91,7 @@ namespace DevelopersHub.ClashOfWhatecer
             Sync();
             _elements.SetActive(true);
             _active = true;
+            Player.instanse.RushSyncRequest();
         }
 
         private void UpdateTrainingList()
@@ -115,7 +116,7 @@ namespace DevelopersHub.ClashOfWhatecer
                     }
                     if (x1 >= 0)
                     {
-
+                        trainigItems[x1].Initialize(Player.instanse.data.units[i]);
                     }
                     else
                     {
@@ -134,7 +135,6 @@ namespace DevelopersHub.ClashOfWhatecer
                     }
                 }
             }
-            ResetTrainingItemsIndex();
         }
 
         public void StartTrainUnit(Data.UnitID id)
@@ -176,66 +176,55 @@ namespace DevelopersHub.ClashOfWhatecer
 
             _housingText.text = occupied.ToString() + "/" + available.ToString();
 
-            for (int i = trainigItems.Count - 1; i >= 0; i--)
-            {
-                if (trainigItems[i])
-                {
-                    int x = -1;
-                    for (int j = Player.instanse.data.units.Count - 1; j >= 0; j--)
-                    {
-                        if (Player.instanse.data.units[j].databaseID == trainigItems[i].databaseID)
-                        {
-                            x = j;
-                            break;
-                        }
-                    }
-                    if (x >= 0)
-                    {
-                        if (Player.instanse.data.units[x].ready)
-                        {
-                            RemoveTrainingItem(i);
-                        }
-                    }
-                    else
-                    {
-                        if(trainigItems[i].remove)
-                        {
-                            RemoveTrainingItem(i);
-                        }
-                    }
-                }
-                else
-                {
-                    RemoveTrainingItem(i);
-                }
-            }
+            RemoveTrainedItems();
             UpdateTrainingList();
+            
+            _housingText.ForceMeshUpdate(true);
         }
 
-        public void RemoveTrainingItem(int i)
+        private void RemoveTrainedItems()
         {
-            if (i < 0 || i >= trainigItems.Count)
+            for (int i = trainigItems.Count - 1; i >= 0; i--)
+            {
+                for (int j = Player.instanse.data.units.Count - 1; j >= 0; j--)
+                {
+                    if (Player.instanse.data.units[j].databaseID == trainigItems[i].databaseID)
+                    {
+                        RemoveTrainingItem(trainigItems[i]);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        private void Update()
+        {
+            for (int i = 0; i < trainigItems.Count; i++)
+            {
+                if (trainigItems[i].done)
+                {
+                    /*
+                    if (trainigItems[i].isTrained)
+                    {
+                        trainigItems[i].gameObject.SetActive(false);
+                    }
+                    */
+                    continue;
+                }
+                trainigItems[i].UpdateStatus(Time.deltaTime);
+                break;
+            }
+        }
+
+        public void RemoveTrainingItem(UI_UnitsTraining item)
+        {
+            if (item == null)
             {
                 return;
             }
-            if (trainigItems[i])
-            {
-                Destroy(trainigItems[i].gameObject);
-            }
-            trainigItems.RemoveAt(i);
-            ResetTrainingItemsIndex();
+            trainigItems.Remove(item);
+            Destroy(item.gameObject);
         }
-
-        public void ResetTrainingItemsIndex()
-        {
-            for (int j = 0; j < trainigItems.Count; j++)
-            {
-                if (trainigItems[j])
-                {
-                    trainigItems[j].index = j;
-                }
-            }
-        }
-
+        
     }
 }

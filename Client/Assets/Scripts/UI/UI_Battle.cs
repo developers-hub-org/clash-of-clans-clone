@@ -138,7 +138,7 @@
         public bool Display(Data.Player player, List<Data.Building> buildings, long defender, Data.BattleType battleType)
         {
             opponentBytes = null;
-            _playerNameText.text = Data.DecodeString(player.name);
+            
             ClearSpells();
             ClearUnits();
             _damagePanel.SetActive(false);
@@ -146,6 +146,9 @@
             _star2.SetActive(false);
             _star3.SetActive(false);
 
+            _playerNameText.text = Data.DecodeString(player.name);
+            _playerNameText.ForceMeshUpdate(true);
+            
             for (int i = 0; i < Player.instanse.data.units.Count; i++)
             {
                 if (!Player.instanse.data.units[i].ready)
@@ -287,8 +290,10 @@
                     _timerDescription.text = "Battle Starts In:";
                     break;
             }
+            _timerDescription.ForceMeshUpdate(true);
             _timerText.text = TimeSpan.FromSeconds(Data.battlePrepDuration).ToString(@"mm\:ss");
-
+            _timerText.ForceMeshUpdate(true);
+            
             ClearBuildingsOnGrid();
             ClearUnitsOnGrid();
 
@@ -351,6 +356,7 @@
                     _findButton.interactable = true;
                     _findCostText.color = Color.white;
                 }
+                _findCostText.ForceMeshUpdate(true);
             }
             _closeButton.gameObject.SetActive(true);
             _surrenderButton.gameObject.SetActive(false);
@@ -363,12 +369,14 @@
             battle.Initialize(battleBuildings, DateTime.Now, BuildingAttackCallBack, BuildingDestroyedCallBack, BuildingDamageCallBack, StarGained);
 
             _percentageText.text = Mathf.RoundToInt((float)(battle.percentage * 100f)).ToString() + "%";
+            _percentageText.ForceMeshUpdate(true);
             UpdateLoots();
 
             var trophies = Data.GetBattleTrophies(Player.instanse.data.trophies, player.trophies);
             _winTrophiesText.text = trophies.Item1.ToString();
+            _winTrophiesText.ForceMeshUpdate(true);
             _looseTrophiesText.text = "-" + trophies.Item2.ToString();
-
+            _looseTrophiesText.ForceMeshUpdate(true);
             surrender = false;
             readyToStart = true;
             isStarted = false;
@@ -389,8 +397,11 @@
         {
             var looted = battle.GetlootedResources();
             _lootGoldText.text = (looted.Item4 - looted.Item1).ToString();
+            _lootGoldText.ForceMeshUpdate(true);
             _lootElixirText.text = (looted.Item5 - looted.Item2).ToString();
+            _lootElixirText.ForceMeshUpdate(true);
             _lootDarkText.text = (looted.Item6 - looted.Item3).ToString();
+            _lootDarkText.ForceMeshUpdate(true);
         }
 
         private void StartBattle()
@@ -408,7 +419,9 @@
                     _timerDescription.text = "Battle Ends In:";
                     break;
             }
+            _timerDescription.ForceMeshUpdate(true);
             _timerText.text = TimeSpan.FromSeconds(Data.battleDuration).ToString(@"mm\:ss");
+            _timerText.ForceMeshUpdate(true);
             _findButton.gameObject.SetActive(false);
             _closeButton.gameObject.SetActive(false);
             _surrenderButton.gameObject.SetActive(true);
@@ -438,9 +451,13 @@
             //Debug.Log("Looted Dark Elixir -> Client:" + looted.Item3 + " Server:" + lootedDark);
             //Debug.Log("Trophies -> Client:" + battle.GetTrophies() + " Server:" + trophies);
             _endTrophiesText.text = trophies.ToString();
+            _endTrophiesText.ForceMeshUpdate(true);
             _endGoldText.text = lootedGold.ToString();
+            _endGoldText.ForceMeshUpdate(true);
             _endElixirText.text = lootedElixir.ToString();
+            _endElixirText.ForceMeshUpdate(true);
             _endDarkText.text = lootedDark.ToString();
+            _endDarkText.ForceMeshUpdate(true);
             if(_endWinEffects != null)
             {
                 _endWinEffects.SetActive(stars > 0);
@@ -472,6 +489,7 @@
                         break;
                 }
             }
+            _endText.ForceMeshUpdate(true);
             for (int i = healthBarGrid.transform.childCount - 1; i >= 0; i--)
             {
                 Destroy(healthBarGrid.transform.GetChild(i).gameObject);
@@ -723,6 +741,7 @@
                     if (_timerText != null)
                     {
                         _timerText.text = TimeSpan.FromSeconds(Data.battleDuration - span.TotalSeconds).ToString(@"mm\:ss");
+                        _timerText.ForceMeshUpdate(true);
                     }
 
                     int frame = (int)Math.Floor(span.TotalSeconds / Data.battleFrameRate);
@@ -805,6 +824,7 @@
                     else
                     {
                         _timerText.text = TimeSpan.FromSeconds(Data.battlePrepDuration - span.TotalSeconds).ToString(@"mm\:ss");
+                        _timerText.ForceMeshUpdate(true);
                     }
                 }
                 UpdateUnits();
@@ -1146,6 +1166,7 @@
             if (percentage > 0)
             {
                 _percentageText.text = Mathf.RoundToInt((float)(battle.percentage * 100f)).ToString() + "%";
+                _percentageText.ForceMeshUpdate(true);
             }
             for (int i = 0; i < buildingsOnGrid.Count; i++)
             {

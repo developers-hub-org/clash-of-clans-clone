@@ -758,7 +758,7 @@
 
         public void SendSyncRequest()
         {
-            Debug.Log("Request Sent."); // For some wierd reason if I remove this debug then buildigs upgrade button will delay showing for a few seconds until next update
+            Debug.Log("Request Sent."); // For some wierd reason if I remove this debug then buildings upgrade button will delay showing for a few seconds until next update
             lastUpdateSent = DateTime.Now;
             Packet p = new Packet();
             p.Write((int)RequestsID.SYNC);
@@ -838,7 +838,7 @@
             UI_Main.instanse._trophiesText.text = data.trophies.ToString();
             UI_Main.instanse._levelText.text = data.level.ToString();
             UI_Main.instanse._xpText.text = data.xp.ToString();
-
+            
             int reqXp = Data.GetNexLevelRequiredXp(data.level);
             UI_Main.instanse._xpBar.fillAmount = (reqXp > 0 ? ((float)data.xp / (float)reqXp) : 0);
 
@@ -876,6 +876,10 @@
             {
                 UI_Store.instanse.Sync();
             }
+            UI_Main.instanse._usernameText.ForceMeshUpdate(true);
+            UI_Main.instanse._trophiesText.ForceMeshUpdate(true);
+            UI_Main.instanse._levelText.ForceMeshUpdate(true);
+            UI_Main.instanse._xpText.ForceMeshUpdate(true);
         }
 
         private void UpdateResourcesUI()

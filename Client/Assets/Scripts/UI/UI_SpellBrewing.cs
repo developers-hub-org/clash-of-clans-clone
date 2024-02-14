@@ -100,7 +100,7 @@ namespace DevelopersHub.ClashOfWhatecer
             paket.Write((int)Player.RequestsID.CANCELBREW);
             paket.Write(_spell.databaseID);
             Sender.TCP_Send(paket);
-            UI_Train.instanse.RemoveTrainingItem(index);
+            UI_Spell.instanse.RemoveTrainingItem(index);
         }
 
         private void Update()

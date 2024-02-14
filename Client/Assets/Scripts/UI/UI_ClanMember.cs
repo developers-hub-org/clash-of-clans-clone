@@ -51,6 +51,10 @@ namespace DevelopersHub.ClashOfWhatecer
                     _rankText.text = "Elder";
                     break;
             }
+            _nameText.ForceMeshUpdate(true);
+            _trophiesText.ForceMeshUpdate(true);
+            _levelText.ForceMeshUpdate(true);
+            _rankText.ForceMeshUpdate(true);
             bool isInWar = false;
             bool canBeKicked = false;
             bool canPromote = false;

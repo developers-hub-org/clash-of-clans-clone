@@ -65,6 +65,7 @@ namespace DevelopersHub.ClashOfWhatecer
                     {
                         instantCost.color = Color.white;
                     }
+                    instantCost.ForceMeshUpdate(true);
                 }
                 instantPanel.gameObject.SetActive(!isChainging && Building.selectedInstanse.data.isConstructing == true && UI_Main.instanse.isActive && instantGemCost > 0);
                 if (Building.selectedInstanse.data.id == Data.BuildingID.obstacle && UI_Main.instanse.isActive && Building.selectedInstanse.data.level > 0 && Building.selectedInstanse.data.isConstructing == false)
@@ -140,6 +141,7 @@ namespace DevelopersHub.ClashOfWhatecer
                         }
                     }
                     removePanel.gameObject.SetActive(true);
+                    removeCost.ForceMeshUpdate(true);
                 }
                 else
                 {
@@ -160,6 +162,7 @@ namespace DevelopersHub.ClashOfWhatecer
                         boostCost.color = Color.red;
                     }
                     boostPanel.gameObject.SetActive(Building.selectedInstanse.data.boost < Player.instanse.data.nowTime);
+                    boostCost.ForceMeshUpdate(true);
                 }
                 else
                 {

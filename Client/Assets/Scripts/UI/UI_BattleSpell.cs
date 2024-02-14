@@ -32,6 +32,7 @@ namespace DevelopersHub.ClashOfWhatecer
         {
             spells.Add(id);
             _haveText.text = spells.Count.ToString();
+            _haveText.ForceMeshUpdate(true);
         }
 
         public long Get()
@@ -43,6 +44,7 @@ namespace DevelopersHub.ClashOfWhatecer
                 spells.RemoveAt(0);
             }
             _haveText.text = "x" + spells.Count.ToString();
+            _haveText.ForceMeshUpdate(true);
             return value;
         }
 

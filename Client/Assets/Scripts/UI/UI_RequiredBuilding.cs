@@ -22,6 +22,8 @@ namespace DevelopersHub.ClashOfWhatecer
                 _Icon.sprite = icon;
             }
             _count.text = "x" + count.ToString();
+            _title.ForceMeshUpdate(true);
+            _count.ForceMeshUpdate(true);
         }
 
     }

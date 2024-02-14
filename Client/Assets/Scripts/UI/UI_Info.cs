@@ -140,6 +140,8 @@
             _active = true;
             transform.SetAsLastSibling();
             _elements.SetActive(true);
+            _titleText.ForceMeshUpdate(true);
+            _descriptionText.ForceMeshUpdate(true);
         }
 
         public void OpenBuildingInfo(Data.BuildingID id, int level)
@@ -305,6 +307,8 @@
             _active = true;
             transform.SetAsLastSibling();
             _elements.SetActive(true);
+            _titleText.ForceMeshUpdate(true);
+            _descriptionText.ForceMeshUpdate(true);
         }
 
         public void OpenSpellInfo(Data.SpellID id)
@@ -369,6 +373,8 @@
             _active = true;
             transform.SetAsLastSibling();
             _elements.SetActive(true);
+            _titleText.ForceMeshUpdate(true);
+            _descriptionText.ForceMeshUpdate(true);
         }
 
     }

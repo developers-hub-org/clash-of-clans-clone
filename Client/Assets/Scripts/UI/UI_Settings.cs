@@ -106,6 +106,7 @@
 
             _active = true;
             _elements.SetActive(true);
+            _languageText.ForceMeshUpdate(true);
         }
 
         private void UpdateSoundButtons()

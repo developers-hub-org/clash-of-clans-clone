@@ -530,6 +530,7 @@ namespace DevelopersHub.ClashOfWhatecer
                 if (buildBar && showBar)
                 {
                     buildBar.texts[0].text = Tools.SecondsToTimeFormat(span);
+                    buildBar.texts[0].ForceMeshUpdate(true);
                     buildBar.bar.fillAmount = Mathf.Abs(1f - ((float)span.TotalSeconds / (float)_data.buildTime));
 
                     if (span.TotalSeconds <= 0)
@@ -720,9 +721,11 @@ namespace DevelopersHub.ClashOfWhatecer
             }
 
             selectedInstanse = this;
-
-            UI_SelectedBuilding.instance._buildingNameText.text = Language.instanse.GetBuildingName(id, data.level);
+            
             UI_SelectedBuilding.instance._elements.SetActive(true);
+            UI_SelectedBuilding.instance._buildingNameText.SetText(Language.instanse.GetBuildingName(id, data.level));
+            UI_SelectedBuilding.instance._buildingNameText.ForceMeshUpdate(true);
+            
             if (!scout)
             {
                 if (_selectEffects)

@@ -20,7 +20,7 @@ namespace DevelopersHub.ClashOfWhatecer
         [SerializeField] public TextMeshProUGUI _countText = null;
         [SerializeField] public TextMeshProUGUI _housingText = null;
 
-        private int count = 0; public int haveCount { get { return count; } set { count = value; _countText.text = "x" + count.ToString(); } }
+        private int count = 0; public int haveCount { get { return count; } set { count = value; _countText.text = "x" + count.ToString(); _countText.ForceMeshUpdate(true); } }
         private bool canTrain = false;
         private int _housing = 0; public int housing { get { return _housing; } }
         private int _housingUnit = 1;
@@ -45,7 +45,7 @@ namespace DevelopersHub.ClashOfWhatecer
             {
                 _icon.sprite = icon;
             }
-
+         
             int barrackLevel = 0;
             int darkBarracksLevel = 0;
 
@@ -94,6 +94,10 @@ namespace DevelopersHub.ClashOfWhatecer
             }
             _resourceText.color = haveResources ? Color.white : Color.red;
             _button.interactable = canTrain && haveResources;
+            
+            _titleText.ForceMeshUpdate(true);
+            _resourceText.ForceMeshUpdate(true);
+            _housingText.ForceMeshUpdate(true);
         }
 
         private void Clicked()

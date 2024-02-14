@@ -33,6 +33,9 @@ namespace DevelopersHub.ClashOfWhatecer
             _icon.sprite = UI_Clan.instanse.patterns[clan.pattern];
             _background.color = Tools.HexToColor(clan.backgroundColor);
             _icon.color = Tools.HexToColor(clan.patternColor);
+            _trophiesText.ForceMeshUpdate(true);
+            _rankText.ForceMeshUpdate(true);
+            _nameText.ForceMeshUpdate(true);
         }
 
         private void Select()

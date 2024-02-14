@@ -32,6 +32,7 @@ namespace DevelopersHub.ClashOfWhatecer
         {
             units.Add(id);
             _haveText.text = "x" + units.Count.ToString();
+            _haveText.ForceMeshUpdate(true);
         }
 
         public long Get()
@@ -43,6 +44,7 @@ namespace DevelopersHub.ClashOfWhatecer
                 units.RemoveAt(0);
             }
             _haveText.text = units.Count.ToString();
+            _haveText.ForceMeshUpdate(true);
             return value;
         }
 

@@ -97,10 +97,13 @@
                 _background.color = _othersColor;
             }
             _nameText.text = Data.DecodeString(_data.name);
+            _nameText.ForceMeshUpdate(true);
             _messageText.text = Data.DecodeString(_data.message);
+            _messageText.ForceMeshUpdate(true);
             DateTime time = Player.instanse.data.nowTime;
             DateTime.TryParse(_data.time, out time);
             _timeText.text = time.ToString();
+            _timeText.ForceMeshUpdate(true);
         }
 
         public void UpdareColor()

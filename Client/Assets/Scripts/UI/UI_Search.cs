@@ -40,6 +40,7 @@ namespace DevelopersHub.ClashOfWhatecer
             }
             _active = status;
             _elements.SetActive(status);
+            _costText.ForceMeshUpdate(true);
         }
 
         private void Close()

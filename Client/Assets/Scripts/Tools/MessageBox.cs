@@ -111,6 +111,7 @@ namespace DevelopersHub.ClashOfWhatecer
                                 if (_layouts[i].texts[j] != null)
                                 {
                                     _layouts[i].texts[j].text = texts[j];
+                                    _layouts[i].texts[j].ForceMeshUpdate(true);
                                 }
                             }
                         }
@@ -125,6 +126,7 @@ namespace DevelopersHub.ClashOfWhatecer
                                     if (text != null)
                                     {
                                         text.text = buttons[j];
+                                        text.ForceMeshUpdate(true);
                                     }
                                 }
                             }
@@ -151,6 +153,7 @@ namespace DevelopersHub.ClashOfWhatecer
                                     if (text != null)
                                     {
                                         text.text = inputs[j];
+                                        text.ForceMeshUpdate(true);
                                     }
                                 }
                             }

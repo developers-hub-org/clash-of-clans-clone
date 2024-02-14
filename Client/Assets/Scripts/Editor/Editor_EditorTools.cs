@@ -21,7 +21,7 @@ using TMPro;
 
     private void ChangeAllFonts(TMP_FontAsset font)
     {
-        TextMeshProUGUI[] texts = FindObjectsOfType<TextMeshProUGUI>(true);
+        TextMeshProUGUI[] texts = FindObjectsByType<TextMeshProUGUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         if(texts != null)
         {
             for (int i = 0; i < texts.Length; i++)

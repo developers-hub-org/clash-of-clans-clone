@@ -263,6 +263,14 @@
                 }
                 _active = true;
                 _elements.SetActive(true);
+                _titleLevel.ForceMeshUpdate(true);
+                _titleLevel.ForceMeshUpdate(true);
+                reqTime.ForceMeshUpdate(true);
+                reqGold.ForceMeshUpdate(true);
+                reqElixir.ForceMeshUpdate(true);
+                reqDark.ForceMeshUpdate(true);
+                reqGems.ForceMeshUpdate(true);
+                _titleBuilding.ForceMeshUpdate(true);
             }
         }
 
