@@ -58,3 +58,18 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.Client.iml
+
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+
+# Default ignored files
+/shelf/
+/workspace.xml
